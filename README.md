@@ -41,7 +41,7 @@ Project in action : [Watch on youtube](https://www.youtube.com/watch?v=wcXuUG4BW
    
    The python script is available at Obstacle_Avoidance_ROS/scripts/sensor_data_listener.py path.
    
-   The script is simply subcribes to ```/scan``` topic's ```sensor_msgs.msg.LaserScan``` message. The message is modified using    the ```LaserScanProcess()``` function.
+   The script is simply subscribes to ```/scan``` topic's ```sensor_msgs.msg.LaserScan``` message. The message is modified using    the ```LaserScanProcess()``` function.
    
    ```rospy.Subscriber("scan", sensor_msgs.msg.LaserScan , LaserScanProcess)```
    
