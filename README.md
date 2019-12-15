@@ -21,8 +21,10 @@ Project in action : [Watch on youtube](https://www.youtube.com/watch?v=wcXuUG4BW
 ## Step by Step ROS Command Explanation
 
 1. First you need to Launch the ROS node.
-   ```source devel/setup.bash```
-   ```roslaunch testbot_description testbot_gazebo.launch```
+   ```
+   source devel/setup.bash
+   roslaunch testbot_description testbot_gazebo.launch
+   ```
 
    testbot_description is the package name that I gave. And testbot_gazebo.launch file can be found at /launch folder
    After executing this command, Gazebo will open like below.
