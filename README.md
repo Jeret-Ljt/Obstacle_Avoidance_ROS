@@ -1,7 +1,10 @@
 # Obstacle_Avoidance_ROS
 Project in action : [Watch on youtube](https://www.youtube.com/watch?v=wcXuUG4BWAU&t=9s)
 
-
+## install gazebo
+   [installation tutorial](http://gazebosim.org/tutorials?tut=install_ubuntu&cat=install)
+## inistall ROS
+   [installation tutorial](http://wiki.ros.org/ROS/Installation)
 
 ## Cloning the project
    
@@ -11,14 +14,14 @@ Project in action : [Watch on youtube](https://www.youtube.com/watch?v=wcXuUG4BW
    
    1. ```mkdir ~/catkin_ws/src/testbot_description```
    2. ```cd ~/catkin_ws/src/testbot_description```
-   3. ```git clone https://github.com/vibhuthasak/Obstacle_Avoidance_ROS.git```
+   3. ```git clone https://github.com/Jeret-Ljt/Obstacle_Avoidance_ROS.git```
    4. ```cd ~/catkin_ws```
    5. ```catkin_make```
 
 ## Step by Step ROS Command Explanation
 
 1. First you need to Launch the ROS node.
-
+   ```source devel/setup.bash```
    ```roslaunch testbot_description testbot_gazebo.launch```
 
    testbot_description is the package name that I gave. And testbot_gazebo.launch file can be found at /launch folder
