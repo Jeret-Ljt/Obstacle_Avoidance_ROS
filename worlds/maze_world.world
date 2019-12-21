@@ -81,7 +81,7 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <model name='maze2'>
-      <pose frame=''>-0.31775 0.201474 0 0 -0 0</pose>
+      <pose frame=''>-0 0 0 0 -0 0</pose>
       <link name='Wall_28'>
         <collision name='Wall_28_Collision'>
           <geometry>
@@ -437,10 +437,10 @@
       <static>1</static>
     </model>
     <state world_name='default'>
-      <sim_time>228 568000000</sim_time>
-      <real_time>72 569457484</real_time>
-      <wall_time>1576740912 391451685</wall_time>
-      <iterations>58545</iterations>
+      <sim_time>258 374000000</sim_time>
+      <real_time>39 347175847</real_time>
+      <wall_time>1576756235 772365630</wall_time>
+      <iterations>29806</iterations>
       <model name='ground_plane'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -504,22 +504,22 @@
         </link>
       </model>
       <model name='robot'>
-        <pose frame=''>-8.31058 -8.23319 0 0 -0 0</pose>
+        <pose frame=''>7.29198 7.31342 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='base_footprint'>
-          <pose frame=''>-8.31058 -8.23319 0 0 -0 0</pose>
+          <pose frame=''>7.29198 7.31342 0 0 -0 0</pose>
           <velocity>0 1e-06 0.001906 5.8e-05 -0 0</velocity>
           <acceleration>0.000441 -0.021788 3.79607 0.115939 -0.000147 2.8e-05</acceleration>
           <wrench>0.002206 -0.10894 18.9804 0 -0 0</wrench>
         </link>
         <link name='left_wheel'>
-          <pose frame=''>-8.31058 -8.98319 0.2 0 5e-06 0</pose>
+          <pose frame=''>7.29198 6.56342 0.2 0 7e-06 0</pose>
           <velocity>0 -1.2e-05 0.001858 5.8e-05 -0 0</velocity>
           <acceleration>7e-06 -0.023155 3.7023 0.115866 5e-06 5e-06</acceleration>
           <wrench>7e-06 -0.023155 3.7023 0 -0 0</wrench>
         </link>
         <link name='right_wheel'>
-          <pose frame=''>-8.31058 -7.48319 0.2 0 4e-06 0</pose>
+          <pose frame=''>7.29198 8.06342 0.2 0 6e-06 0</pose>
           <velocity>0 -1.1e-05 0.001946 5.7e-05 -0 0</velocity>
           <acceleration>-1e-06 -0.022633 3.87518 0.113227 -2.6e-05 3.9e-05</acceleration>
           <wrench>-1e-06 -0.022633 3.87518 0 -0 0</wrench>
@@ -531,7 +531,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>0.086642 -0.66979 50.6002 1.14511 1.51681 1.21108</pose>
+        <pose frame=''>-1.92447 -1.95832 50.4968 1.14511 1.51681 1.21108</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>

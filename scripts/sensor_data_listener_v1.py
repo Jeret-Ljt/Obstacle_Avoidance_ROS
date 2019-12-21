@@ -37,10 +37,10 @@ def LaserScanProcess(data):
     global LINX
     global angz
     if average_gap < max_gap:
-        angz = -0.5
+        LINX = -1
     else:
-        LINX = 0.5
-        angz = Kp*(-1)*(90 - turn_angle)
+        LINX = 1.5
+        angz = Kp*(-1)*(90 - turn_angle) + 50 * Kp * (random.random() - 0.5)
 
 def main():
     rospy.init_node('listener', anonymous=True)
@@ -54,10 +54,6 @@ def main():
         command = Twist()
         command.linear.x = LINX
         command.angular.z = angz
-        
-        command.linear.x = 0
-        command.linear.y = 0
-        command.angular.z = 0.5
         pub.publish(command)
         rate.sleep()
 
