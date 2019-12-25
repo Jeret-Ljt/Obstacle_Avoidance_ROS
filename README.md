@@ -1,18 +1,19 @@
 # Obstacle_Avoidance_ROS
 
 ## install gazebo & ROS
-   [installation tutorial](http://gazebosim.org/tutorials?tut=install_ubuntu&cat=install)
-   [installation tutorial](http://wiki.ros.org/ROS/Installation)
-   Reconmend: gazebo7.0+ROS kinetic+ubuntu16.04
+ * [installation tutorial](http://gazebosim.org/tutorials?tut=install_ubuntu&cat=install)
+
+ * [installation tutorial](http://wiki.ros.org/ROS/Installation)
+ * Reconmend: gazebo7.0+ROS kinetic+ubuntu16.04
 
 ## install some gazebo models
 ```
-	cd ~/.gazebo/
-	mkdir  models
-	cd models/
-	wget http://file.ncnynl.com/ros/gazebo_models.txt
-	wget -i gazebo_models.txt
-	ls model.tar.g* | xargs -n1 tar xzvf   
+cd ~/.gazebo/
+mkdir  models
+cd models/
+wget http://file.ncnynl.com/ros/gazebo_models.txt
+wget -i gazebo_models.txt
+ls model.tar.g* | xargs -n1 tar xzvf   
 ```
 
 ## Cloning the project
