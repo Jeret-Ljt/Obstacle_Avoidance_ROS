@@ -40,7 +40,7 @@ ls model.tar.g* | xargs -n1 tar xzvf
 
    testbot_description is the package name that I gave. And testbot_gazebo.launch file can be found at /launch folder
    After executing this command, Gazebo will open like below.
-   ![alt text](https://github.com/vibhuthasak/Obstacle_Avoidance_ROS/blob/maze_branch/WechatIMG907.jpeg)
+   ![alt text](https://github.com/Jeret-Ljt/Obstacle_Avoidance_ROS/blob/maze_branch/WechatIMG907.jpeg)
 
 **Everthing looking great so far right ?** 
 
