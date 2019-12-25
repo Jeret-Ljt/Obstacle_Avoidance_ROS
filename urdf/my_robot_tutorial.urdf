@@ -43,7 +43,7 @@
         <geometry>
           <cylinder length="0.05" radius="0.75"/>
         </geometry>
-        <material name="white"/>
+        <material name="red"/>
       </visual>
       <collision>
         <origin rpy="0 0 0 " xyz="0 0 0"/>
@@ -55,6 +55,7 @@
 
 	<gazebo reference="base_link">
       <turnGravityOff>false</turnGravityOff>
+      <material>Gazebo/Green</material>
     </gazebo>
 
 	<link name="right_wheel">
@@ -63,7 +64,7 @@
             <geometry>
                 <cylinder length="0.1" radius="0.2"/>
             </geometry>
-			<material name="blue"/>
+			<material name="red"/>
         </visual>
 		<collision>
 		  <origin rpy="1.57079632679 0 0 " xyz="0 0 0"/>
@@ -82,7 +83,7 @@
   		<mu2 value="100.0"/>
   		<kp value="10000000.0" />
   		<kd value="1.0" />
-  		<material>Gazebo/Grey</material>
+  		<material>Gazebo/Red</material>
       <turnGravityOff>false</turnGravityOff>
     </gazebo>
 
@@ -111,7 +112,7 @@
             <geometry>
                 <cylinder length="0.1" radius="0.2"/>
             </geometry>
-			<material name="blue"/>
+			<material name="red"/>
         </visual>
 		<collision>
 		  <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
@@ -130,7 +131,7 @@
     	<mu2 value="100.0"/>
     	<kp value="10000000.0" />
     	<kd value="1.0" />
-    	<material>Gazebo/Grey</material>
+    	<material>Gazebo/Red</material>
         <turnGravityOff>false</turnGravityOff>
     </gazebo>
 
@@ -183,29 +184,32 @@
             <geometry>
                 <box size="0.1 0.1 0.1"/>
             </geometry>
-			<material name="blue"/>
+			<material name="red"/>
         </visual>
     </link>
 
 	<joint name="hokuyo_joint" type="fixed">
 		<parent link="base_link"/>
 		<child link="hokuyo_link"/>
-		<origin xyz="0.70 0 0.075" rpy="0 0 0" />
+		<origin xyz="0 0 0.25" rpy="0 0 0" />
 	</joint>
 
 	<gazebo reference="hokuyo_link">
-    <material>Gazebo/Blue</material>
+    <material>Gazebo/Red</material>
 	    <sensor name="head_hokuyo_sensor" type="ray">
 	      <pose>0.05 0 0 0 0 0</pose>
-	      <visualize>true</visualize>
+	      <visualize>false</visualize>
 	      <update_rate>40</update_rate>
 	      <ray>
 	        <scan>
 	          <horizontal>
 	            <samples>720</samples>
 	            <resolution>1</resolution>
-	            <min_angle>-1.570796</min_angle>
-	            <max_angle>1.570796</max_angle>
+	            
+	            <min_angle>-3.1415926</min_angle>
+	            <max_angle>3.1415926</max_angle>
+	            <!-- min_angle>-1.57079636</min_angle -->
+	            <!-- max_angle>1.57079636</max_angle -->
 	          </horizontal>
 	        </scan>
 	        <range>
