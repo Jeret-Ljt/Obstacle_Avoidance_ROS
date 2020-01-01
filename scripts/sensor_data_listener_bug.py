@@ -20,11 +20,11 @@ PI = 3.1415926
 pos_x = 0
 pos_y = 0
 
+
 tgt_x = 10
 tgt_y = 10
 
 yaw = 0
-dist = 0
 
 MODE = 'follow the line'
 Ranges = [0] * 720
@@ -38,6 +38,7 @@ d_right = 0
 d_front = 0
 
 
+real_v = 0
 def Clip(x, l, r):
 	return max(min(x, r), l)
 
@@ -50,8 +51,8 @@ def LaserScanProcess(data):
 	global d_front
 	
 	d_front = min(Ranges[660:720] + Ranges[0:60])
-	d_left = min(Ranges[0:200])
-	d_right = min(Ranges[520:720])
+	d_left = min(Ranges[0:210])
+	d_right = min(Ranges[510:720])
 	
 	
 	Ranges = data.ranges
@@ -106,12 +107,10 @@ def Close(x1, y1, x2, y2):
 def Odometry_process(data):
 	global pos_x
 	global pos_y
-	global dist
-
+	
 	X = data.pose.pose.position.x
 	Y = data.pose.pose.position.y
-	temp_dist = get_dist(X, Y, pos_x, pos_y)
-	dist = dist + temp_dist
+
 
 	pos_x = X
 	pos_y = Y  # update the record
@@ -156,8 +155,11 @@ def Follow_the_line():
 	elif delta < -PI:
 		delta = 2 * PI + delta
 	
-	LINX = Clip((d_front - Obstacle_TH) * 1.2, 0.5, 1.6) + (-abs(delta)) * 0.9
-	angz = delta * 2
+	if abs(delta) > PI / 3:
+		LINX = 0
+	else:
+		LINX = Clip((d_front - Obstacle_TH) * 1.2, 0.5, 1.6)
+	angz = delta * 1.5
 	return
 		
 def Follow_the_wall():
@@ -193,7 +195,7 @@ def Follow_the_wall():
 			LINX = 0
 			return
 		else:
-			wall_distance = d_left
+			wall_distance = Clip(d_left, 0.9, 1.2)
 			MODE = 'follow the wall by left'
 			return
 	elif MODE == 'follow the wall step one by right' :
@@ -202,7 +204,7 @@ def Follow_the_wall():
 			LINX = 0
 			return
 		else:
-			wall_distance = d_right
+			wall_distance = Clip(d_right, 0.9, 1.2)
 			MODE = 'follow the wall by right'
 			return
 
@@ -233,18 +235,13 @@ def Follow_the_wall():
 			if d_front < Obstacle_TH:
 				MODE = 'follow the wall step one by right'
 				return
-			
-			angz = Clip( (wall_distance - d_right) * 0.6, -0.3 , 0.3)
+			angz = Clip( (wall_distance - d_right) * 0.4, -0.3 , 0.3)
 		elif MODE == 'follow the wall by left':
 			if d_front < Obstacle_TH:
 				MODE = 'follow the wall step one by left'
 				return
-			
-			angz = Clip( -(wall_distance - d_left) * 0.6, -0.3 , 0.3)
-			
-		else:
-			print('some thing wrong!!!??')
-		LINX = 0.3
+			angz = Clip( -(wall_distance - d_left) * 0.4, -0.3 , 0.3)
+		LINX = 0.4
 		return
 
 def main():
@@ -256,6 +253,9 @@ def main():
 	global d_left
 	global tgt_x
 	global tgt_y
+	global pos_x
+	global pos_y
+	global yaw
 	global wall_distance
 	
 	rospy.init_node('listener', anonymous=True)
@@ -268,37 +268,65 @@ def main():
 	rate = rospy.Rate(10)  # 10hz
 	
 	
-	stop = False
 	stage = 1
+	last_x = 0
+	last_y = 0
+	last_yaw = 0
+	dist = 0
+	back_MODE = MODE
+	count = 0
 	while not rospy.is_shutdown():
 		print('the status:' + MODE)
+		real_v = get_dist(last_x, last_y, pos_x, pos_y)
+		real_w = abs(last_yaw - yaw)
+		dist += real_v 
 		
-		if MODE == 'follow the line':
+		last_x = pos_x
+		last_y = pos_y
+		last_yaw = yaw
+
+			
+		if MODE == 'stuck':
+			if count == 0:
+				MODE = back_MODE
+			else:
+				count -= 1
+				angz = random.random() - 0.5
+				LINX = -0.5
+		elif MODE == 'follow the line':
 			Follow_the_line()
 		else:
 			Follow_the_wall()
 		
-		if stop:
-			LINX = 0
-			angz = 0
+			
 		
 		command = Twist()
 		command.linear.x = LINX
 		command.angular.z = angz
+		
+		
 		pub.publish(command)
 		
+		'''
+		if real_v < 0.003 and real_w < 0.003 and MODE != 'stuck':
+			back_MODE = MODE
+			count = 10
+			MODE = 'stuck'
+		'''
 		print("the distance in front of you: " + str(d_front))
 		print("the distance in right of you: " + str(d_right))
 		print("the distance in left of you: "  + str(d_left))
 		print('the wall distance:' + str(wall_distance))
 		print("the linx: " + str(LINX))
 		print("the angz: " + str(angz))
+		print("the real_v: " + str(real_v))
+		print("the real_w: " + str(real_w))
 		
-				
-		if not stop and Close(pos_x, pos_y, tgt_x, tgt_y):
-			if stage == 9:
-				stop = True
+		
+		if Close(pos_x, pos_y, tgt_x, tgt_y):
+			if stage == 8:
 				print(dist)
+				break
 			else:
 				stage += 1
 				if stage % 2 == 0:
